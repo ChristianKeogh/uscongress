@@ -36,10 +36,12 @@ function MemberCard({ member }: { member: Member }) {
         </p>
         {depiction?.imageUrl && url && (
           <Link
-            href={"/profile/" + bioguideId}
+            href={bioguideId ? `/profile/${bioguideId}` : "#"}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 text-xs underline"
+            className={`text-blue-600 text-xs underline ${
+              !bioguideId && "pointer-events-none opacity-50"
+            }`}
           >
             View Profile
           </Link>

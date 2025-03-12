@@ -2,12 +2,21 @@ import { fetchCongressMember } from "@/api/api";
 import MemberProfile from "./profile";
 
 export default async function ProfilePage({
-  params,
+  params: paramsPromise,
 }: {
-  params: { bioNum: string };
+  params: Promise<{ bioNum: string }>;
 }) {
-  const { bioNum } = await params;
-  const member = await fetchCongressMember(bioNum);
+  // Wait for params to resolve
+  const params = await paramsPromise;
+
+  console.log("Fetching member for:", params.bioNum);
+
+  if (!params.bioNum) {
+    return <div className="text-red-500">Error: No bio number provided</div>;
+  }
+
+  const member = await fetchCongressMember(params.bioNum);
+  console.log("Fetched Member:", member);
 
   if (!member) {
     return <div className="text-red-500">Error: Member not found</div>;
