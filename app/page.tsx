@@ -11,10 +11,10 @@ function MemberCard({ member }: { member: Member }) {
     ? terms.item[terms.item.length - 1]
     : null;
 
+  //TODO: right now we are just looking at the most recent stint in whichever house or senate and counting from there, we should instead count the first
+
   const chamber = lastTerm?.chamber || "Unknown";
-  const startYear = lastTerm?.startYear || "N/A";
-  const endYear = lastTerm?.endYear ? ` - ${lastTerm.endYear}` : "";
-  // console.log(name, chamber);
+  const startYear = terms?.item[0].startYear || "N/A";
 
   return (
     <div className="flex items-center space-x-4 p-4 border rounded-lg shadow-sm">
@@ -31,9 +31,7 @@ function MemberCard({ member }: { member: Member }) {
         <p className="text-xs">
           {name.includes("Vance") ? "Vice President" : chamber}
         </p>
-        <p className="text-xs">
-          Active: {startYear} {endYear}
-        </p>
+        <p className="text-xs">Active Since: {startYear}</p>
         {depiction?.imageUrl && url && (
           <Link
             href={bioguideId ? `/profile/${bioguideId}` : "#"}
