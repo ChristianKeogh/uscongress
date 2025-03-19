@@ -4,7 +4,7 @@ import { Member } from "@/models/membercard-model";
 import { Congress } from "@/models/wholecongress-model";
 import Link from "next/link";
 
-function MemberCard({ member }: { member: Member }) {
+const MemberCard = ({ member }: { member: Member }) => {
   const { name, partyName, state, terms, depiction, url, bioguideId } = member;
 
   // Get the last term if terms.item exists
@@ -50,7 +50,7 @@ function MemberCard({ member }: { member: Member }) {
   );
 }
 
-export function countCongressMembers(members: Member[]): Congress {
+const countCongressMembers = (members: Member[]): Congress =>{
   const congress: Congress = {
     numDemocrats: { house: 0, senate: 0, total: 0 },
     numRepublicans: { house: 0, senate: 0, total: 0 },
@@ -64,7 +64,7 @@ export function countCongressMembers(members: Member[]): Congress {
     //   console.log(member);
     //   return;
     // }
-    console.log(member);
+    // console.log(member);
 
     // if (member.name.toLowerCase() === "gaetz, matt") {
     //   console.log(member);

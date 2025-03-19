@@ -23,7 +23,7 @@ export const fetchCongressNumber = async () => {
   }
 };
 
-export async function fetchAllMembers() {
+export const fetchAllMembers = async ()=> {
   const congressNum = await fetchCongressNumber();
   let allMembers: Member[] = [];
   let offset = 0;

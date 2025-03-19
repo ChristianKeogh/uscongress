@@ -1,5 +1,5 @@
 import { fetchCongressMember } from "@/api/api";
-import MemberProfile from "./profile";
+import {MemberProfile} from "./profile";
 
 export default async function ProfilePage({
   params: paramsPromise,
