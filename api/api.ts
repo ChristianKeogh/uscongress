@@ -4,7 +4,8 @@ export const fetchCongressNumber = async () => {
   try {
     const res = await fetch(
       `https://api.congress.gov/v3/bill?api_key=${process.env.CONGRESS_KEY}`,
-      { next: { revalidate: 3600 }})
+      { next: { revalidate: 3600 } }
+    );
 
     if (!res.ok) throw new Error(`Error fetching bill: ${res.statusText}`);
 
@@ -22,7 +23,7 @@ export const fetchCongressNumber = async () => {
   }
 };
 
-export const fetchAllMembers = async ()=> {
+export const fetchAllMembers = async () => {
   const congressNum = await fetchCongressNumber();
   let allMembers: Member[] = [];
   let offset = 0;
@@ -52,13 +53,13 @@ export const fetchAllMembers = async ()=> {
   }
 
   return allMembers;
-}
+};
 
 export const fetchCongressMember = async (memberNumber: string) => {
   try {
     const res = await fetch(
       `https://api.congress.gov/v3/member/${memberNumber}?api_key=${process.env.CONGRESS_KEY}`,
-      { next: { revalidate: 3600 }}
+      { next: { revalidate: 3600 } }
     );
 
     if (!res.ok) throw new Error(`Error fetching bill: ${res.statusText}`);

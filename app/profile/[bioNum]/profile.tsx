@@ -96,4 +96,4 @@ export const MemberProfile = ({ member }: { member: any }) => {
       </div>
     </div>
   );
-}
+};

@@ -37,7 +37,6 @@ const MemberCard = ({ member }: { member: Member }) => {
           <Link
             href={bioguideId ? `/profile/${bioguideId}` : "#"}
             target="_blank"
-            rel="noopener noreferrer"
             className={`text-blue-600 text-xs underline ${
               !bioguideId && "pointer-events-none opacity-50"
             }`}
@@ -48,9 +47,9 @@ const MemberCard = ({ member }: { member: Member }) => {
       </div>
     </div>
   );
-}
+};
 
-const countCongressMembers = (members: Member[]): Congress =>{
+const countCongressMembers = (members: Member[]): Congress => {
   const congress: Congress = {
     numDemocrats: { house: 0, senate: 0, total: 0 },
     numRepublicans: { house: 0, senate: 0, total: 0 },
@@ -100,7 +99,7 @@ const countCongressMembers = (members: Member[]): Congress =>{
   });
 
   return congress;
-}
+};
 
 export default async function Home() {
   const congress = await fetchAllMembers();
