@@ -36,7 +36,6 @@ const MemberCard = ({ member }: { member: Member }) => {
         {depiction?.imageUrl && url && (
           <Link
             href={bioguideId ? `/profile/${bioguideId}` : "#"}
-            target="_blank"
             className={`text-blue-600 text-xs underline ${
               !bioguideId && "pointer-events-none opacity-50"
             }`}
