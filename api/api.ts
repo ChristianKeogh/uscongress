@@ -4,8 +4,7 @@ export const fetchCongressNumber = async () => {
   try {
     const res = await fetch(
       `https://api.congress.gov/v3/bill?api_key=${process.env.CONGRESS_KEY}`,
-      { cache: "no-store" }
-    );
+      { next: { revalidate: 3600 }})
 
     if (!res.ok) throw new Error(`Error fetching bill: ${res.statusText}`);
 
@@ -59,7 +58,7 @@ export const fetchCongressMember = async (memberNumber: string) => {
   try {
     const res = await fetch(
       `https://api.congress.gov/v3/member/${memberNumber}?api_key=${process.env.CONGRESS_KEY}`,
-      { cache: "no-store" }
+      { next: { revalidate: 3600 }}
     );
 
     if (!res.ok) throw new Error(`Error fetching bill: ${res.statusText}`);

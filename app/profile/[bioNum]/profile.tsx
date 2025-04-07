@@ -1,3 +1,4 @@
+//TODO: Fix this any hack
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const MemberProfile = ({ member }: { member: any }) => {
   if (!member)

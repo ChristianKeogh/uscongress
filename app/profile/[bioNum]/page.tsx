@@ -1,15 +1,22 @@
-import { fetchCongressMember } from "@/api/api";
-import {MemberProfile} from "./profile";
+import { fetchAllMembers, fetchCongressMember } from "@/api/api";
+import { MemberProfile } from "./profile";
 
-export default async function ProfilePage({
-  params: paramsPromise,
-}: {
-  params: Promise<{ bioNum: string }>;
-}) {
-  // Wait for params to resolve
-  const params = await paramsPromise;
+export const revalidate = 3600;
 
-  if (!params.bioNum) {
+export async function generateStaticParams(): Promise<{ bioNum: string }[]> {
+  const members = await fetchAllMembers();
+
+  return members.map((member) => ({
+    bioNum: member.bioguideId,
+  }));
+}
+
+//TODO: figure out the problem with the type error here. It's expecting a promise
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+export default async function ProfilePage(props: any) {
+  const params = await props.params;
+
+  if (!params?.bioNum) {
     return <div className="text-red-500">Error: No bio number provided</div>;
   }
 
