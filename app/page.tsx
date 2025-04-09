@@ -57,44 +57,45 @@ const countCongressMembers = (members: Member[]): Congress => {
     numSenate: 0,
   };
 
-  members.forEach((member) => {
-    // if (member.name.toLowerCase() === "vance, j. d.") {
-    //   console.log(member);
-    //   return;
-    // }
-    // console.log(member);
+  const nonVotingTerritories = new Set([
+    "northern mariana islands",
+    "district of columbia",
+    "american samoa",
+    "virgin islands",
+    "guam",
+    "puerto rico",
+  ]);
 
-    // if (member.name.toLowerCase() === "gaetz, matt") {
-    //   console.log(member);
-    //   return;
-    // }
-    const memberterm = member.terms.item.length - 1;
-    const isHouse =
-      member.terms.item[memberterm].chamber.toLowerCase() ===
-      "house of representatives";
-    const isSenate =
-      member.terms.item[memberterm].chamber.toLowerCase() === "senate";
+  members.forEach((member) => {
+    const name = member.name.toLowerCase();
+    const state = member.state.toLowerCase();
+
+    if (name === "vance, j. d." || nonVotingTerritories.has(state)) return;
+
+    const terms = member.terms.item;
+    const latestTerm = terms[terms.length - 1];
+
+    if (latestTerm.endYear) return;
+
+    const chamber = latestTerm.chamber.toLowerCase();
+    const party = member.partyName.toLowerCase();
+
+    const isHouse = chamber === "house of representatives";
+    const isSenate = chamber === "senate";
 
     if (isHouse) congress.numHouse++;
     if (isSenate) congress.numSenate++;
 
-    switch (member.partyName.toLowerCase()) {
-      case "democratic":
-        if (isHouse) congress.numDemocrats.house++;
-        if (isSenate) congress.numDemocrats.senate++;
-        congress.numDemocrats.total++;
-        break;
-      case "republican":
-        if (isHouse) congress.numRepublicans.house++;
-        if (isSenate) congress.numRepublicans.senate++;
-        congress.numRepublicans.total++;
-        break;
-      default:
-        if (isHouse) congress.numIndo.house++;
-        if (isSenate) congress.numIndo.senate++;
-        congress.numIndo.total++;
-        break;
-    }
+    const target =
+      party === "democratic"
+        ? congress.numDemocrats
+        : party === "republican"
+        ? congress.numRepublicans
+        : congress.numIndo;
+
+    if (isHouse) target.house++;
+    if (isSenate) target.senate++;
+    target.total++;
   });
 
   return congress;
@@ -105,15 +106,27 @@ export default async function Home() {
 
   const congressNumbers = countCongressMembers(congress);
 
+  const republicans = congress.filter(
+    (member) => member.partyName.toLowerCase() === "republican"
+  );
+  const democrats = congress.filter(
+    (member) => member.partyName.toLowerCase() === "democratic"
+  );
+  const independents = congress.filter(
+    (member) =>
+      member.partyName.toLowerCase() !== "republican" &&
+      member.partyName.toLowerCase() !== "democratic"
+  );
+
   return (
     <div className="max-w-screen-xxl mx-auto px-4">
       <div className="text-center text-base leading-6">
         <h4 className="text-lg font-semibold">US Congress</h4>
         <p>
-          Senate: <strong>{congressNumbers.numSenate}</strong>
+          Senate: <strong>{congressNumbers.numSenate}/100</strong>
         </p>
         <p>
-          House: <strong>{congressNumbers.numHouse}</strong>
+          House: <strong>{congressNumbers.numHouse}/435</strong>
         </p>
         <p>
           Republicans in Senate:{" "}
@@ -142,11 +155,43 @@ export default async function Home() {
       </div>
 
       {/* Grid Container */}
-      <div className="overflow-hidden w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 p-4">
-          {congress.map((member) => (
-            <MemberCard key={member.bioguideId} member={member} />
-          ))}
+      <div className="flex flex-col w-full gap-8 p-4">
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Democrats */}
+          <div className="flex-1 bg-blue-50 p-4 rounded-xl">
+            <h2 className="text-lg font-bold text-blue-600 mb-4 text-center">
+              Democrats
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 justify-items-center">
+              {democrats.map((member) => (
+                <MemberCard key={member.bioguideId} member={member} />
+              ))}
+            </div>
+          </div>
+
+          {/* Republicans */}
+          <div className="flex-1 bg-red-50 p-4 rounded-xl">
+            <h2 className="text-lg font-bold text-red-600 mb-4 text-center">
+              Republicans
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 justify-items-center">
+              {republicans.map((member) => (
+                <MemberCard key={member.bioguideId} member={member} />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Independents at the bottom */}
+        <div className="bg-yellow-50 p-4 rounded-xl">
+          <h2 className="text-lg font-bold text-gray-700 mb-4 text-center">
+            Independents
+          </h2>
+          <div className="grid grid-cols-1 gap-4 justify-items-center">
+            {independents.map((member) => (
+              <MemberCard key={member.bioguideId} member={member} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
