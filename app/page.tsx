@@ -3,6 +3,7 @@ import { fetchAllMembers } from "@/api/api";
 import { Member } from "@/models/membercard-model";
 import { Congress } from "@/models/wholecongress-model";
 import Link from "next/link";
+import RadialVisitorsChart from "@/components/ui/radial-chart";
 
 const MemberCard = ({ member }: { member: Member }) => {
   const { name, partyName, state, terms, depiction, url, bioguideId } = member;
@@ -119,46 +120,30 @@ export default async function Home() {
   );
 
   return (
-    <div className="max-w-screen-xxl mx-auto px-4">
-      <div className="max-w-md mx-auto bg-white shadow-md rounded-xl p-6 text-center space-y-4">
-        <h4 className="text-2xl font-bold text-gray-800">U.S. Congress</h4>
-
-        {/* Senate Summary */}
-        <div className="bg-blue-50 rounded-lg p-4">
-          <p className="text-lg font-semibold text-blue-700 mb-2">Senate</p>
-          <p>
-            Total: <strong>{congressNumbers.numSenate}/100</strong>
-          </p>
-          <p className="text-red-600">
-            Republicans:{" "}
-            <strong>{congressNumbers.numRepublicans.senate}</strong>
-          </p>
-          <p className="text-blue-600">
-            Democrats: <strong>{congressNumbers.numDemocrats.senate}</strong>
-          </p>
-          <p className="text-yellow-600">
-            Independents: <strong>{congressNumbers.numIndo.senate}</strong>
-          </p>
+    <div className="bg-white rounded-xl p-4 text-center space-y-4">
+      <h4 className="text-3xl font-bold text-gray-800">U.S. Congress</h4>
+      // TODO: Need to fix this so it doesnt overlap when the screen width is
+      smaller
+      <div className="flex flex-row justify-center gap-x-52 gap-y-24 flex-wrap max-h-[240px]">
+        <div className="w-[400px]">
+          <RadialVisitorsChart
+            var1={congressNumbers.numRepublicans.senate}
+            var2={congressNumbers.numDemocrats.senate}
+            var3={congressNumbers.numIndo.senate}
+            total={congressNumbers.numSenate}
+            label_name="Senate"
+          />
         </div>
-
-        {/* House Summary */}
-        <div className="bg-green-50 rounded-lg p-4">
-          <p className="text-lg font-semibold text-green-700 mb-2">House</p>
-          <p>
-            Total: <strong>{congressNumbers.numHouse}/435</strong>
-          </p>
-          <p className="text-red-600">
-            Republicans: <strong>{congressNumbers.numRepublicans.house}</strong>
-          </p>
-          <p className="text-blue-600">
-            Democrats: <strong>{congressNumbers.numDemocrats.house}</strong>
-          </p>
-          <p className="text-yellow-600">
-            Independents: <strong>{congressNumbers.numIndo.house}</strong>
-          </p>
+        <div className="w-[400px]">
+          <RadialVisitorsChart
+            var1={congressNumbers.numRepublicans.house}
+            var2={congressNumbers.numDemocrats.house}
+            var3={congressNumbers.numIndo.house}
+            total={congressNumbers.numHouse}
+            label_name="House"
+          />
         </div>
       </div>
-
       {/* Grid Container */}
       <div className="flex flex-col w-full gap-8 p-4">
         <div className="flex flex-col lg:flex-row gap-8">
