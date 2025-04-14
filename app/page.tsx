@@ -120,11 +120,10 @@ export default async function Home() {
   );
 
   return (
-    <div className="bg-white rounded-xl p-4 text-center space-y-4">
+    <div className="bg-white rounded-xl p-6 text-center space-y-6">
       <h4 className="text-3xl font-bold text-gray-800">U.S. Congress</h4>
-      // TODO: Need to fix this so it doesnt overlap when the screen width is
-      smaller
-      <div className="flex flex-row justify-center gap-x-52 gap-y-24 flex-wrap max-h-[240px]">
+
+      <div className="flex flex-row justify-center gap-12 flex-wrap">
         <div className="w-[400px]">
           <RadialVisitorsChart
             var1={congressNumbers.numRepublicans.senate}
@@ -144,6 +143,7 @@ export default async function Home() {
           />
         </div>
       </div>
+
       {/* Grid Container */}
       <div className="flex flex-col w-full gap-8 p-4">
         <div className="flex flex-col lg:flex-row gap-8">

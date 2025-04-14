@@ -44,7 +44,7 @@ export default function RadialVisitorsChart({
   ];
 
   return (
-    <Card className="h-3">
+    <Card className="h-52">
       <CardHeader className="items-center pb-0">
         <CardTitle className="text-2xl font-bold">{label_name}</CardTitle>
       </CardHeader>
