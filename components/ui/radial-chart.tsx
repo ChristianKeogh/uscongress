@@ -44,14 +44,14 @@ export default function RadialVisitorsChart({
   ];
 
   return (
-    <Card className="h-52">
+    <Card className="flex-auto">
       <CardHeader className="items-center pb-0">
         <CardTitle className="text-2xl font-bold">{label_name}</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-1 items-center pb-0">
+      <CardContent className="flex items-center pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square w-full max-w-[500px]"
+          className="mx-auto h-96 w-full max-w-[500px]"
         >
           <RadialBarChart
             data={data}

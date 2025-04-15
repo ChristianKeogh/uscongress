@@ -88,12 +88,12 @@ export default function ClientCongressView({
   );
 
   return (
-    <div className="bg-white rounded-xl p-6 text-center space-y-6">
+    <div className="bg-white rounded-xl text-center space-y-6">
       <h4 className="text-3xl font-bold text-gray-800">
         United States Congress
       </h4>
 
-      <div className="flex flex-row justify-center gap-12 flex-wrap pb-20">
+      <div className="flex justify-center flex-wrap">
         <div className="w-[400px]">
           <RadialVisitorsChart
             var1={congressNumbers.numRepublicans.senate}
@@ -114,11 +114,11 @@ export default function ClientCongressView({
         </div>
       </div>
 
-      <div className="w-full max-w-md mx-auto">
+      <div className="w-3/6 mx-auto">
         <input
           type="text"
           placeholder="Search by name, state, or party..."
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />

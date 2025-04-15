@@ -1,8 +1,6 @@
 import { fetchAllMembers, fetchCongressMember } from "@/api/api";
 import { MemberProfile } from "./profile";
 
-export const revalidate = 3600;
-
 export async function generateStaticParams(): Promise<{ bioNum: string }[]> {
   const members = await fetchAllMembers();
 
