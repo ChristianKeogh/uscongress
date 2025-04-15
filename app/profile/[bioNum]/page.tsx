@@ -10,17 +10,20 @@ export async function generateStaticParams(): Promise<{ bioNum: string }[]> {
     bioNum: member.bioguideId,
   }));
 }
+export type paramsType = Promise<{ id: string }>;
 
-//TODO: figure out the problem with the type error here. It's expecting a promise
-/* eslint-disable  @typescript-eslint/no-explicit-any */
-export default async function ProfilePage(props: any) {
-  const params = await props.params;
+export default async function ProfilePage({
+  params,
+}: {
+  params: Promise<{ bioNum: string }>;
+}) {
+  const { bioNum } = await params;
 
-  if (!params?.bioNum) {
+  if (!bioNum) {
     return <div className="text-red-500">Error: No bio number provided</div>;
   }
 
-  const member = await fetchCongressMember(params.bioNum);
+  const member = await fetchCongressMember(bioNum);
 
   if (!member) {
     return <div className="text-red-500">Error: Member not found</div>;
