@@ -59,12 +59,12 @@ export default function RadialVisitorsChart({
             innerRadius={120}
             outerRadius={270}
           >
-            <svg className="top-0 left-0 h-2">
+            <svg className="top-0 left-0">
               <line
                 x1="50%"
                 y1="0"
                 x2="50%"
-                y2="25%"
+                y2="27%"
                 stroke="black"
                 strokeWidth="2"
                 strokeDasharray="4"
