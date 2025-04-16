@@ -51,20 +51,22 @@ export default function RadialVisitorsChart({
       <CardContent className="flex items-center pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto h-96 w-full max-w-[500px]"
+          className="mx-auto h-56 w-full max-w-[500px]"
         >
           <RadialBarChart
             data={data}
             endAngle={180}
             innerRadius={120}
             outerRadius={270}
+            cx="50%"
+            cy="80%" // push it to the bottom
           >
             <svg className="top-0 left-0">
               <line
                 x1="50%"
                 y1="0"
                 x2="50%"
-                y2="27%"
+                y2="40%"
                 stroke="black"
                 strokeWidth="2"
                 strokeDasharray="4"
