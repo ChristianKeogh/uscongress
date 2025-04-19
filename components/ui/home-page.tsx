@@ -90,7 +90,6 @@ export default function ClientCongressView({
   return (
     <div className="bg-white rounded-xl text-center space-y-6">
       <h4 className="text-4xl font-extrabold text-center text-blue-800 tracking-wide relative inline-block px-6 py-3 uppercase">
-        <span className="absolute inset-0 border-4 border-red-600 rounded-md -z-10"></span>
         <span className="inline-block mr-2 text-red-600">★</span>
         United States Congress
         <span className="inline-block ml-2 text-red-600">★</span>
