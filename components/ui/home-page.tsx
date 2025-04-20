@@ -5,6 +5,7 @@ import { Congress } from "@/models/wholecongress-model";
 import Link from "next/link";
 import RadialVisitorsChart from "@/components/ui/radial-chart";
 import { useMemo, useState } from "react";
+import Navbar from "./navbar";
 
 type Props = {
   allMembers: Member[];
@@ -26,25 +27,25 @@ const MemberCard = ({ member }: { member: Member }) => {
   const startYear = terms?.item[0].startYear || "N/A";
 
   return (
-    <div className="flex items-center space-x-4 p-4 border rounded-lg shadow-sm">
+    <div className="flex items-center space-x-3 p-2 border rounded-md shadow-sm">
       <img
         src={depiction?.imageUrl || "/placeholder.jpg"}
         alt={name}
-        className="w-16 h-16 rounded-full object-cover"
+        className="w-12 h-12 rounded-full object-cover"
       />
-      <div className="text-left">
-        <h2 className="text-lg font-semibold">{name}</h2>
-        <p className="text-sm text-gray-500">
+      <div className="text-left text-sm">
+        <h2 className="font-medium text-gray-800">{name}</h2>
+        <p className="text-xs text-gray-500">
           {partyName} - {state}
         </p>
-        <p className="text-xs">
+        <p className="text-xs text-gray-400">
           {name.includes("Vance") ? "Vice President" : chamber}
         </p>
-        <p className="text-xs">Active Since: {startYear}</p>
+        <p className="text-xs text-gray-400">Since: {startYear}</p>
         {depiction?.imageUrl && url && (
           <Link
             href={bioguideId ? `/profile/${bioguideId}` : "#"}
-            className={`text-blue-600 text-xs underline ${
+            className={`text-blue-500 text-xs underline ${
               !bioguideId && "pointer-events-none opacity-50"
             }`}
           >
@@ -89,11 +90,7 @@ export default function ClientCongressView({
 
   return (
     <div className="bg-white rounded-xl text-center space-y-6">
-      <h4 className="text-4xl font-extrabold text-center text-blue-800 tracking-wide relative inline-block px-6 py-3 uppercase">
-        <span className="inline-block mr-2 text-red-600">★</span>
-        United States Congress
-        <span className="inline-block ml-2 text-red-600">★</span>
-      </h4>
+      <Navbar />
 
       <div className="flex justify-center flex-wrap gap-x-20">
         <div className="w-[400px]">
