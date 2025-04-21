@@ -1,7 +1,6 @@
+import UsaMap from "@/components/ui/usa-map";
+
 //TODO: Fix this any hack
-
-import Navbar from "@/components/ui/navbar";
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const MemberProfile = ({ member }: { member: any }) => {
   if (!member)
@@ -29,29 +28,26 @@ export const MemberProfile = ({ member }: { member: any }) => {
   /* eslint-disable @next/next/no-img-element */
   return (
     <div>
-      <Navbar />
-
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg border border-gray-200 space-y-6">
-          {/* Header Section */}
-          <div className="flex items-center space-x-4">
+      <div className="flex flex-col md:flex-row p-24">
+        {/* Left Section: Member Profile */}
+        <div className="flex-1 space-y-6">
+          <div className="flex items-center space-x-2">
             <img
               src={depiction?.imageUrl || "/placeholder.jpg"}
               alt={directOrderName}
               className="w-28 h-28 rounded-full object-cover"
             />
             <div>
-              <h1 className="text-2xl font-semibold">
-                {honorificName}
-                {directOrderName}
+              <h1 className="text-3xl font-semibold">
+                {honorificName} {directOrderName}
               </h1>
               <p className="text-gray-600">Born {birthYear}</p>
             </div>
           </div>
 
           {/* Contact Information */}
-          <div className="border-t pt-4">
-            <h2 className="text-lg font-semibold">Contact</h2>
+          <div>
+            <h2 className="text-2xl font-semibold">Contact Information</h2>
             <p className="text-gray-600">
               <strong>Office:</strong> {addressInformation?.officeAddress}
             </p>
@@ -71,8 +67,8 @@ export const MemberProfile = ({ member }: { member: any }) => {
           </div>
 
           {/* Political Info */}
-          <div className="border-t pt-4">
-            <h2 className="text-lg font-semibold">Political Information</h2>
+          <div>
+            <h2 className="text-2xl font-semibold">Political Information</h2>
             <p className="text-gray-600">
               <strong>State:</strong> {state}
             </p>
@@ -90,8 +86,8 @@ export const MemberProfile = ({ member }: { member: any }) => {
           </div>
 
           {/* Legislation Stats */}
-          <div className="border-t pt-4">
-            <h2 className="text-lg font-semibold">Legislation Activity</h2>
+          <div>
+            <h2 className="text-2xl font-semibold">Legislation Activity</h2>
             <p className="text-gray-600">
               <strong>Sponsored Bills:</strong> {sponsoredLegislation?.count}
             </p>
@@ -100,6 +96,11 @@ export const MemberProfile = ({ member }: { member: any }) => {
               {cosponsoredLegislation?.count}
             </p>
           </div>
+        </div>
+
+        {/* Right Section: USA Map */}
+        <div className="flex-1 flex justify-center items-center pt-4">
+          <UsaMap stateAbbr={state} party={partyHistory?.[0]?.partyName} />
         </div>
       </div>
     </div>

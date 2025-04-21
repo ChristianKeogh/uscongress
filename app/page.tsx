@@ -1,5 +1,5 @@
 import { fetchAllMembers } from "@/api/api";
-import ClientCongressView from "@/components/ui/home-page";
+import HomePage from "@/components/ui/home-page";
 import { countCongressMembers } from "@/lib/utils";
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -11,7 +11,7 @@ export default async function Home(props: any) {
   const congressNumbers = countCongressMembers(congress);
 
   return (
-    <ClientCongressView
+    <HomePage
       allMembers={congress}
       congressNumbers={congressNumbers}
       initialSearch={searchParams.search || ""}
