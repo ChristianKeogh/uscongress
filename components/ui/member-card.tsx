@@ -32,6 +32,7 @@ export const MemberCard = ({ member }: { member: Member }) => {
         <p className="text-xs text-gray-400">Since: {startYear}</p>
         {depiction?.imageUrl && url && (
           <Link
+            prefetch={false}
             href={bioguideId ? `/profile/${bioguideId}` : "#"}
             className={`text-blue-500 text-xs underline ${
               !bioguideId && "pointer-events-none opacity-50"
