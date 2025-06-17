@@ -1,5 +1,6 @@
 import { Member } from "@/models/membercard-model";
 import Link from "next/link";
+import Image from "next/image";
 
 export const MemberCard = ({ member }: { member: Member }) => {
   const { name, partyName, state, terms, depiction, url, bioguideId } = member;
@@ -13,14 +14,17 @@ export const MemberCard = ({ member }: { member: Member }) => {
 
   const chamber = lastTerm?.chamber || "Unknown";
   const startYear = terms?.item[0].startYear || "N/A";
-
   return (
     <div className="flex items-center space-x-3 p-2 border rounded-md shadow-sm">
-      <img
-        src={depiction?.imageUrl || "/placeholder.jpg"}
-        alt={name}
-        className="w-12 h-12 rounded-full object-cover"
-      />
+      <div className="w-12 h-12 relative">
+        <Image
+          src={depiction?.imageUrl || "/placeholder.jpg"}
+          alt={name}
+          fill
+          className="rounded-full object-cover"
+          sizes="48px"
+        />
+      </div>
       <div className="text-left text-sm">
         <h2 className="font-medium text-gray-800">{name}</h2>
         <p className="text-xs text-gray-500">
