@@ -4,7 +4,7 @@ export const fetchCongressNumber = async () => {
   try {
     const res = await fetch(
       `https://api.congress.gov/v3/bill?api_key=${process.env.CONGRESS_KEY}`,
-      { next: { revalidate: 172800 } }
+      { cache: "force-cache" }
     );
 
     if (!res.ok) throw new Error(`Error fetching bill: ${res.statusText}`);
@@ -34,7 +34,7 @@ export const fetchAllMembers = async () => {
     try {
       const res = await fetch(
         `https://api.congress.gov/v3/member/congress/${congressNum}?offset=${offset}&limit=${limit}&format=json&api_key=${process.env.CONGRESS_KEY}`,
-        { next: { revalidate: 172800 } }
+        { cache: "force-cache" }
       );
 
       if (!res.ok) throw new Error(`Error fetching data: ${res.statusText}`);
@@ -60,7 +60,7 @@ export const fetchCongressMember = async (memberNumber: string) => {
   try {
     const res = await fetch(
       `https://api.congress.gov/v3/member/${memberNumber}?api_key=${process.env.CONGRESS_KEY}`,
-      { next: { revalidate: 172800 } }
+      { cache: "force-cache" }
     );
 
     if (!res.ok) throw new Error(`Error fetching bill: ${res.statusText}`);
