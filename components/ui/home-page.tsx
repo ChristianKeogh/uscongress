@@ -1,5 +1,4 @@
 "use client";
-/* eslint-disable @next/next/no-img-element */
 import { Member } from "@/models/membercard-model";
 import { Congress } from "@/models/wholecongress-model";
 import RadialVisitorsChart from "@/components/ui/radial-chart";
