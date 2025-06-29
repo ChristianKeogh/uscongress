@@ -79,38 +79,44 @@ export default function HomePage({
 
       <div className="flex flex-col w-full gap-8 p-4">
         <div className="flex flex-col lg:flex-row gap-8">
-          <div className="flex-1 bg-blue-50 p-4 rounded-xl">
+          {/* Democrats Section */}
+          <div className="flex-1 bg-blue-50 p-4 rounded-xl flex flex-col max-h-[600px] relative">
             <h2 className="text-lg font-bold text-blue-600 mb-4 text-center">
               Democrats
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 justify-items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 justify-items-center overflow-y-auto flex-1 pr-2">
               {democrats.map((member) => (
                 <MemberCard key={member.bioguideId} member={member} />
               ))}
             </div>
+            <div className="pointer-events-none absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-blue-50 to-transparent" />
           </div>
 
-          <div className="flex-1 bg-red-50 p-4 rounded-xl">
+          {/* Republicans Section */}
+          <div className="flex-1 bg-red-50 p-4 rounded-xl flex flex-col max-h-[600px] relative">
             <h2 className="text-lg font-bold text-red-600 mb-4 text-center">
               Republicans
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 justify-items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 justify-items-center overflow-y-auto flex-1 pr-2">
               {republicans.map((member) => (
                 <MemberCard key={member.bioguideId} member={member} />
               ))}
             </div>
+            <div className="pointer-events-none absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-red-50 to-transparent" />
           </div>
         </div>
 
-        <div className="bg-yellow-50 p-4 rounded-xl">
+        {/* Independents Section */}
+        <div className="bg-yellow-50 p-4 rounded-xl flex flex-col max-h-[600px] relative">
           <h2 className="text-lg font-bold text-gray-700 mb-4 text-center">
             Independents
           </h2>
-          <div className="grid grid-cols-1 gap-4 justify-items-center">
+          <div className="grid grid-cols-1 gap-4 justify-items-center overflow-y-auto flex-1 pr-2">
             {independents.map((member) => (
               <MemberCard key={member.bioguideId} member={member} />
             ))}
           </div>
+          <div className="pointer-events-none absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-yellow-50 to-transparent" />
         </div>
       </div>
     </div>
