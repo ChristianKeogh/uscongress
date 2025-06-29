@@ -30,7 +30,12 @@ export default function UsaMap({ stateAbbr, party }: UsaMapProps) {
     }
 
     if (target) {
-      const color = party === "Democratic" ? "#3b82f6" : "#ef4444"; // Tailwind blue/red
+      const color =
+        party === "Democratic"
+          ? "#3b82f6" // blue
+          : party === "Republican"
+          ? "#ef4444" // red
+          : "#facc15"; // yellow
       target.setAttribute("fill", color);
     }
   }, [stateAbbr, party]);
