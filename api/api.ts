@@ -33,8 +33,7 @@ export const fetchAllMembers = async () => {
   while (hasMoreData) {
     try {
       const res = await fetch(
-        `https://api.congress.gov/v3/member/congress/${congressNum}?offset=${offset}&limit=${limit}&format=json&api_key=${process.env.CONGRESS_KEY}`,
-        { cache: "force-cache" }
+        `https://api.congress.gov/v3/member/congress/${congressNum}?offset=${offset}&limit=${limit}&format=json&api_key=${process.env.CONGRESS_KEY}`
       );
 
       if (!res.ok) throw new Error(`Error fetching data: ${res.statusText}`);
