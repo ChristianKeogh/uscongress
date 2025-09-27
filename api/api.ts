@@ -3,7 +3,8 @@ import { Member } from "@/models/membercard-model";
 export const fetchCongressNumber = async () => {
   try {
     const res = await fetch(
-      `https://api.congress.gov/v3/bill?api_key=${process.env.CONGRESS_KEY}`
+      `https://api.congress.gov/v3/bill?api_key=${process.env.CONGRESS_KEY}&format=json`,
+      { cache: "force-cache" }
     );
 
     if (!res.ok) throw new Error(`Error fetching bill: ${res.statusText}`);
@@ -32,7 +33,8 @@ export const fetchAllMembers = async () => {
   while (hasMoreData) {
     try {
       const res = await fetch(
-        `https://api.congress.gov/v3/member/congress/${congressNum}?offset=${offset}&limit=${limit}&format=json&api_key=${process.env.CONGRESS_KEY}`
+        `https://api.congress.gov/v3/member/congress/${congressNum}?offset=${offset}&limit=${limit}&format=json&api_key=${process.env.CONGRESS_KEY}`,
+        { cache: "force-cache" }
       );
 
       if (!res.ok) throw new Error(`Error fetching data: ${res.statusText}`);
