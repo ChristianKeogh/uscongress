@@ -2,19 +2,22 @@ import { Member } from "@/models/membercard-model";
 
 export const fetchCongressNumber = async () => {
   try {
-    const key = process.env.CONGRESS_KEY;
-    if (!key) throw new Error("Missing CONGRESS_KEY");
-
     const res = await fetch(
-      `https://api.congress.gov/v3/congress?api_key=${key}`
+      `https://api.congress.gov/v3/bill?api_key=${process.env.CONGRESS_KEY}`
     );
-    if (!res.ok)
-      throw new Error(`Error fetching congress list: ${res.statusText}`);
+
+    if (!res.ok) throw new Error(`Error fetching bill: ${res.statusText}`);
 
     const data = await res.json();
-    return data?.congresses?.[0]?.congress ?? null;
-  } catch (e) {
-    console.error("Error fetching Congress list:", e);
+
+    if (!data?.bills?.length) {
+      throw new Error("No bills found in response.");
+    }
+
+    const congressNumber = data.bills[0].congress;
+    return congressNumber;
+  } catch (error) {
+    console.error("Error fetching Congress bills:", error);
     return null;
   }
 };
