@@ -22,7 +22,8 @@ export default function UsaMap({ stateAbbr, party }: UsaMapProps) {
       svgElement.querySelectorAll("path").forEach((path) => {
         const title = path.querySelector("title");
         if (
-          title?.textContent?.toLowerCase().includes(stateAbbr.toLowerCase())
+          title?.textContent?.toLowerCase().trim() ===
+          stateAbbr.toLowerCase().trim()
         ) {
           target = path;
         }

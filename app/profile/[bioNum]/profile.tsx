@@ -22,7 +22,6 @@ export const MemberProfile = ({ member }: { member: any }) => {
     cosponsoredLegislation,
     terms,
   } = member.member;
-
   const latestTerm = terms?.[terms.length - 1];
 
   /* eslint-disable @next/next/no-img-element */
