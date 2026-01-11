@@ -1,7 +1,6 @@
 "use client";
 import { Member } from "@/models/membercard-model";
 import { Congress } from "@/models/wholecongress-model";
-import RadialVisitorsChart from "@/components/ui/radial-chart";
 import { useMemo, useState } from "react";
 import { MemberCard } from "./member-card";
 
@@ -13,7 +12,7 @@ type Props = {
 
 export default function HomePage({
   allMembers,
-  congressNumbers,
+  // congressNumbers,
   initialSearch,
 }: Props) {
   const [searchTerm, setSearchTerm] = useState(initialSearch);
@@ -44,7 +43,7 @@ export default function HomePage({
 
   return (
     <div className="bg-white rounded-xl text-center space-y-6">
-      <div className="flex justify-center flex-wrap gap-x-20">
+      {/* <div className="flex justify-center flex-wrap gap-x-20">
         <div className="w-[400px]">
           <RadialVisitorsChart
             var1={congressNumbers.numRepublicans.senate}
@@ -63,7 +62,8 @@ export default function HomePage({
             label_name="House"
           />
         </div>
-      </div>
+      </div> */}
+      {/* TODO: Fix why prod build isn't working */}
 
       <div className="w-3/6 mx-auto">
         <h1 className="text-2xl font-bold p-6">Search your Representative</h1>
