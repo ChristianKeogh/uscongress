@@ -1,6 +1,8 @@
 import { Member } from "@/models/membercard-model";
 
 export const fetchCongressNumber = async () => {
+    return 119;
+  /*
   try {
     const res = await fetch(
       `https://api.congress.gov/v3/bill?api_key=${process.env.CONGRESS_KEY}&format=json`,
@@ -21,6 +23,7 @@ export const fetchCongressNumber = async () => {
     console.error("Error fetching Congress bills:", error);
     return null;
   }
+  */
 };
 
 export const fetchAllMembers = async () => {

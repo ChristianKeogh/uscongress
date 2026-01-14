@@ -34,7 +34,7 @@ export const countCongressMembers = (members: Member[]): Congress => {
     const terms = member.terms.item;
     const latestTerm = terms[terms.length - 1];
 
-    if (latestTerm.endYear) return;
+    if (latestTerm.endYear && latestTerm.endYear < 2026) return;
 
     const chamber = latestTerm.chamber.toLowerCase();
     const party = member.partyName.toLowerCase();

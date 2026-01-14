@@ -31,11 +31,13 @@ export const MemberProfile = ({ member }: { member: any }) => {
         {/* Left Section: Member Profile */}
         <div className="flex-1 space-y-6">
           <div className="flex items-center space-x-2">
-            <img
-              src={depiction?.imageUrl || "/placeholder.jpg"}
-              alt={directOrderName}
-              className="w-28 h-28 rounded-full object-cover"
-            />
+            <div style={{ viewTransitionName: `image-${member.request.bioguideId}` } as React.CSSProperties}>
+              <img
+                src={depiction?.imageUrl || "/placeholder.jpg"}
+                alt={directOrderName}
+                className="w-28 h-28 rounded-full object-cover"
+              />
+            </div>
             <div>
               <h1 className="text-3xl font-semibold">
                 {honorificName} {directOrderName}
