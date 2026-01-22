@@ -17,15 +17,16 @@ export default function AboutPage() {
           </div>
           <div className="px-8 py-10 space-y-6 text-gray-600 text-lg leading-relaxed">
             <p>
-              The <strong>US Congress Tracker</strong> is a specialized platform designed to provide
-              up-to-date information about the legislative branch of the United States federal government.
+              The <strong>US Congress Tracker</strong> is a platform designed to provide
+              up-to-date information about the legislative branch of the United States federal government. Created by {" "}  <a
+                href="https://www.christiankeogh.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 font-medium underline decoration-blue-300 underline-offset-2 transition-colors"
+              >
+                Christian Keogh
+              </a>
             </p>
-            <p>
-              Our mission is to make congressional data accessible and transparent, allowing citizens
-              to easily stay informed about the composition of the House and Senate.
-            </p>
-
-            <h2 className="text-2xl font-bold text-gray-900 pt-4">Data Source</h2>
             <p>
               This application leverages the official{" "}
               <a
@@ -36,20 +37,7 @@ export default function AboutPage() {
               >
                 Congress.gov API
               </a>
-              . By connecting directly to government records, we ensure that the information presented—from
-              member details to party affiliations—is derived from the most authoritative source available.
             </p>
-
-            <h2 className="text-2xl font-bold text-gray-900 pt-4">How It Works</h2>
-            <p>
-              The site automatically fetches the latest data on the current Congress. It filters and processes
-              this raw data to present:
-            </p>
-            <ul className="list-disc pl-6 space-y-2">
-              <li>Real-time party composition charts</li>
-              <li>Searchable profiles for every member of the House and Senate</li>
-              <li>Detailed filtering by chamber and party</li>
-            </ul>
 
              <div className="pt-8 flex justify-center">
                 <Link
