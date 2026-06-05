@@ -1,95 +1,81 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Congress } from "@/models/wholecongress-model";
-import {
-    Bar,
-    BarChart,
-    Legend,
-    ResponsiveContainer,
-    Tooltip,
-    XAxis,
-    YAxis,
-} from "recharts";
 
 type Props = {
   congressNumbers: Congress;
 };
 
-export function CongressCompositionChart({ congressNumbers }: Props) {
-  const data = [
-    {
-      name: "Senate",
-      Republicans: congressNumbers.numRepublicans.senate,
-      Democrats: congressNumbers.numDemocrats.senate,
-      Independents: congressNumbers.numIndo.senate,
-    },
-    {
-      name: "House",
-      Republicans: congressNumbers.numRepublicans.house,
-      Democrats: congressNumbers.numDemocrats.house,
-      Independents: congressNumbers.numIndo.house,
-    },
-  ];
+type BarRowProps = {
+  label: string;
+  dem: number;
+  rep: number;
+  ind: number;
+  total: number;
+};
+
+function BarRow({ label, dem, rep, ind, total }: BarRowProps) {
+  const demPct = (dem / total) * 100;
+  const repPct = (rep / total) * 100;
+  const indPct = (ind / total) * 100;
 
   return (
-    <Card className="w-full max-w-4xl mx-auto shadow-lg border border-gray-100 bg-white/80 backdrop-blur-sm">
-      <CardHeader>
-        <CardTitle className="text-xl font-bold text-center text-gray-800">
-          Congress Composition
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="h-[300px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              layout="vertical"
-              data={data}
-              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-            >
-              <XAxis type="number" hide />
-              <YAxis
-                dataKey="name"
-                type="category"
-                axisLine={false}
-                tickLine={false}
-                tick={{ fill: "#374151", fontSize: 14, fontWeight: 600 }}
-                width={80}
-              />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "rgba(255, 255, 255, 0.95)",
-                  borderRadius: "8px",
-                  border: "none",
-                  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
-                }}
-                cursor={{ fill: "rgba(0,0,0,0.05)" }}
-              />
-              <Legend wrapperStyle={{ paddingTop: "20px" }} />
-              <Bar
-                dataKey="Democrats"
-                stackId="a"
-                fill="#3b82f6" // Blue-500
-                radius={[4, 0, 0, 4]}
-                barSize={60}
-              />
-              <Bar
-                dataKey="Independents"
-                stackId="a"
-                fill="#9ca3af" // Gray-400
-                barSize={60}
-              />
-              <Bar
-                dataKey="Republicans"
-                stackId="a"
-                fill="#ef4444" // Red-500
-                radius={[0, 4, 4, 0]}
-                barSize={60}
-              />
-            </BarChart>
-          </ResponsiveContainer>
+    <div className="space-y-1.5">
+      <div className="flex items-center justify-between text-xs">
+        <span className="font-medium text-foreground">{label}</span>
+        <div className="flex items-center gap-3 text-muted-foreground">
+          <span className="text-blue-600 font-medium">{dem} D</span>
+          {ind > 0 && <span className="text-gray-500">{ind} I</span>}
+          <span className="text-red-600 font-medium">{rep} R</span>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+      <div className="flex h-2.5 rounded-full overflow-hidden bg-muted">
+        <div
+          className="bg-[hsl(214,80%,51%)] transition-all"
+          style={{ width: `${demPct}%` }}
+        />
+        {ind > 0 && (
+          <div
+            className="bg-[hsl(220,10%,65%)] transition-all"
+            style={{ width: `${indPct}%` }}
+          />
+        )}
+        <div
+          className="bg-[hsl(4,74%,52%)] transition-all"
+          style={{ width: `${repPct}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
+export function CongressCompositionChart({ congressNumbers }: Props) {
+  const senateTotal =
+    congressNumbers.numDemocrats.senate +
+    congressNumbers.numRepublicans.senate +
+    congressNumbers.numIndo.senate;
+
+  const houseTotal =
+    congressNumbers.numDemocrats.house +
+    congressNumbers.numRepublicans.house +
+    congressNumbers.numIndo.house;
+
+  return (
+    <div className="space-y-4 w-full">
+      <BarRow
+        label="Senate"
+        dem={congressNumbers.numDemocrats.senate}
+        rep={congressNumbers.numRepublicans.senate}
+        ind={congressNumbers.numIndo.senate}
+        total={senateTotal}
+      />
+      <BarRow
+        label="House"
+        dem={congressNumbers.numDemocrats.house}
+        rep={congressNumbers.numRepublicans.house}
+        ind={congressNumbers.numIndo.house}
+        total={houseTotal}
+      />
+    </div>
   );
 }

@@ -1,6 +1,5 @@
 import Navbar from "@/components/ui/navbar";
 import type { Metadata } from "next";
-import { ViewTransitions } from "next-view-transitions";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -15,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "United States Government",
-  description: "See charts",
+  title: "US Congress",
+  description: "Explore the 119th United States Congress",
 };
 
 export default function RootLayout({
@@ -29,10 +28,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ViewTransitions>
           <Navbar />
           {children}
-        </ViewTransitions>
       </body>
     </html>
   );
