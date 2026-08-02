@@ -26,15 +26,19 @@ export const countCongressMembers = (members: Member[]): Congress => {
   ]);
 
   members.forEach((member) => {
-    const name = member.name.toLowerCase();
     const state = member.state.toLowerCase();
 
-    if (name === "vance, j. d." || nonVotingTerritories.has(state)) return;
+    if (nonVotingTerritories.has(state)) return;
 
     const terms = member.terms.item;
     const latestTerm = terms[terms.length - 1];
 
-    if (latestTerm.endYear && latestTerm.endYear < 2026) return;
+    // The congress.gov endpoint returns everyone who has served in this
+    // Congress, including members who resigned/died and their replacements.
+    // A departed member's final term carries an endYear; a currently-seated
+    // member's latest term has none. Counting only the latter avoids
+    // double-counting a vacated seat and its successor.
+    if (latestTerm.endYear) return;
 
     const chamber = latestTerm.chamber.toLowerCase();
     const party = member.partyName.toLowerCase();
